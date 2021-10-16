@@ -55,7 +55,7 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 		telefono1[1] = "656951595";
 		telefono1[2] = "656951888";
 		clienteRepository.save(new Cliente(null, nombreCompleto1, direccionRepository.save(new Direccion(null,
-				"Calle", "Argüeso", 21, "A", null, 4,
+				"Calle", "Argüeso", 21, null, null, 4,
 				"Derecha", "28025", "Madrid", "España")),
 				"jesus.bonilla@gmail.com", "99999999Z", telefono1, 27, true));
 
@@ -450,8 +450,6 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 						}
 					}
 				}
-
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
