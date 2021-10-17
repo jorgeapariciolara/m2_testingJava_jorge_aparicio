@@ -13,11 +13,11 @@ import java.util.Optional;
 @RestController
 public class ClienteControllerRest {
 
-    public ClienteControllerRest () {}
     @Autowired
     ClienteRepository clienteRepository;
     @Autowired
     DireccionRepository direccionRepository;
+    public ClienteControllerRest () {}
 
     // MÉTODOS
     // CREAR REGISTROS DE PRUEBA
