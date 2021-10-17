@@ -12,15 +12,17 @@ import java.util.Optional;
 @RestController
 public class ClienteControllerRest {
 
+    public ClienteControllerRest () {}
+
     private ClienteRepository clienteRepository;
-    public ClienteControllerRest(ClienteRepository clienteRepository) {}
+    public ClienteControllerRest(ClienteRepository clienteRepository) {this.clienteRepository=clienteRepository;}
 
     private DireccionRepository direccionRepository;
-    public ClienteControllerRest (DireccionRepository direccionRepository) {}
+    public ClienteControllerRest(DireccionRepository direccionRepository){this.direccionRepository=direccionRepository;}
 
     // MÉTODOS
     // CREAR REGISTROS DE PRUEBA
-    @GetMapping ("/clientes/data")
+    @GetMapping ("/clientes-rest/data")
     public void demoData () {
         // Cliente 1
         String[] nombreCompleto1 = new String[3];
@@ -66,12 +68,12 @@ public class ClienteControllerRest {
 
     }
     // CONSULTAR TODOS LOS REGISTROS
-    @GetMapping ("/clientes")
+    @GetMapping ("/clientes-rest")
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
     }
     // CONSULTAR UN REGISTRO POR ID
-    @GetMapping ("/clientes/{id}")
+    @GetMapping ("/clientes-rest/{id}")
     public Cliente findById(@PathVariable Long id) {
         Optional<Cliente> clienteOpt = clienteRepository.findById(id);
         if (clienteOpt.isPresent()) {
@@ -81,24 +83,24 @@ public class ClienteControllerRest {
         }
     }
     // CONSULTAR UN REGISTRO POR DNI
-    @GetMapping ("/clientes/{dni}")
+    @GetMapping ("/clientes-rest/{dni}")
     public List<Cliente> findByDni (@PathVariable String dni) {
         return clienteRepository.findByDni(dni);
     }
     // CREAR UN REGISTRO
-    @PostMapping ("/clientes")
+    @PostMapping ("/clientes-rest")
     public void create(@RequestBody Cliente cliente){
         if (cliente.getId() == null)
             clienteRepository.save(cliente);
     }
     // ACTUALIZAR UN REGISTRO
-    @PutMapping("/clientes")
+    @PutMapping("/clientes-rest")
     public void update(@RequestBody Cliente cliente){
         if(cliente.getId() != null && clienteRepository.existsById(cliente.getId()))
             clienteRepository.save(cliente);
     }
     // BORRAR UN REGISTRO
-    @DeleteMapping("/clientes/{id}")
+    @DeleteMapping("/clientes-rest/{id}")
     public void deleteById(@PathVariable Long id){
         if (clienteRepository.existsById(id))
             clienteRepository.deleteById(id);

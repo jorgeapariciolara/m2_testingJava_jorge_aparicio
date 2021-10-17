@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +19,13 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 
 	@Autowired
 	ClienteRepository clienteRepository;
-
 	@Autowired
 	DireccionRepository direccionRepository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(M2TestingJavaJorgeAparicioApplication.class, args);
+		ApplicationContext context = SpringApplication.run(M2TestingJavaJorgeAparicioApplication.class, args);
+		ClienteRepository clienteRepository = context.getBean(ClienteRepository.class);
+		DireccionRepository direccionRepository = context.getBean(DireccionRepository.class);
 	}
 
 	public void showMenu() {
@@ -58,7 +60,6 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 				"Calle", "Argüeso", 21, "D", null, 4,
 				"Derecha", "28025", "Madrid", "España")),
 				"jesus.bonilla@gmail.com", "99999999Z", telefono1, 27, true));
-
 		// Cliente 2
 		String[] nombreCompleto2 = new String[3];
 		nombreCompleto2[0] = "Patricia";
@@ -72,7 +73,6 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 				"Plaza", "Elíptica", 1, null, "Central", 7,
 				"F", "28025", "Madrid", "España")), "patri.chula@hotmail.com",
 				"88888888Y", telefono2, 27, true));
-
 		// Cliente 3
 		String[] nombreCompleto3 = new String[3];
 		nombreCompleto3[0] = "Mª Jesús";
@@ -142,7 +142,6 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 
 				} else if (opcion == 4) {
 					System.out.println("Ha seleccionado la opción 4 - CREAR UN NUEVO CLIENTE");
-
 					System.out.println("1. DATOS PERSONALES");
 					System.out.println("Introduzca el NOMBRE");
 					String nombre = scanner.next();
@@ -155,7 +154,6 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 					nombreCompleto[1] = primerApellido;
 					nombreCompleto[2] = segundoApellido;
 					scanner.nextLine();
-
 					System.out.println("2. DIRECCIÓN POSTAL");
 					System.out.println("Introduzca el TIPO DE VÍA (Calle, Plaza, Camino, etc.)");
 					String tipoVia = scanner.next();
@@ -195,15 +193,12 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 					String ciudad = scanner.next();
 					System.out.println("Introduzca el PAÍS");
 					String pais = scanner.next();
-
 					System.out.println("3. EMAIL");
 					System.out.println("Introduzca el email");
 					String email = scanner.next();
-
 					System.out.println("4. DNI");
 					System.out.println("Introduzca el DNI");
 					String dni = scanner.next();
-
 					System.out.println("5. TELÉFONOS");
 					System.out.println("¿Tiene TELÉFONO FIJO? (SÍ / NO)");
 					String respuesta1 = scanner.next();
@@ -230,12 +225,10 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 					telefono[0] = telefonoDomicilio;
 					telefono[1] = telefonoMovil;
 					telefono[2] = telefonoTrabajo;
-
 					System.out.println("6. EDAD");
 					System.out.println("Introduzca la edad");
 					int edad = scanner.nextInt();
 					scanner.nextLine();
-
 					System.out.println("7. CARNET DE SOCIO");
 					System.out.println("Tiene carnet de socio");
 					boolean carnetSocio = scanner.nextBoolean();
@@ -250,7 +243,6 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 
 				} else if (opcion == 5) {
 					System.out.println("Ha seleccionado la opción 5 - MODIFICAR UN CLIENTE (utilizando el id)");
-
 					System.out.println("Por favor, introduzca el id del cliente que desea modificar: ");
 					Long id = scanner.nextLong();
 					Optional<Cliente> clienteOpt = clienteRepository.findById(id);
@@ -388,7 +380,6 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 						telefono[1] = telefonoMovil;
 						telefono[2] = telefonoTrabajo;
 						cliente.setTelefono(telefono);
-
 					}
 					System.out.println("¿Quiere modificar la EDAD?");
 					if (scanner.next().equalsIgnoreCase("si")) {

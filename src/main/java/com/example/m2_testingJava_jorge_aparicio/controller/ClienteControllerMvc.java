@@ -6,10 +6,7 @@ import com.example.m2_testingJava_jorge_aparicio.repository.ClienteRepository;
 import com.example.m2_testingJava_jorge_aparicio.repository.DireccionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,15 +15,16 @@ import java.util.Optional;
 public class ClienteControllerMvc {
 
     private ClienteRepository clienteRepository;
-    public ClienteControllerMvc(ClienteRepository clienteRepository) {}
-
+    public ClienteControllerMvc (ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;}
     private DireccionRepository direccionRepository;
-    public ClienteControllerMvc (DireccionRepository direccionRepository) {}
-
+    public ClienteControllerMvc (DireccionRepository direccionRepository) {
+        this.direccionRepository = direccionRepository;}
+    public ClienteControllerMvc () {}
 
     // MÉTODOS
     // CREAR REGISTROS DE PRUEBA
-    @GetMapping("/clientes/data")
+    @GetMapping("/clientes-mvc/data")
     public void demoData () {
         // Cliente 1
         String[] nombreCompleto1 = new String[3];
@@ -76,7 +74,7 @@ public class ClienteControllerMvc {
         clienteRepository.save(cliente3);
     }
     // RECUPERAR TODOS LOS REGISTROS
-    @GetMapping ("/clientes")
+    @GetMapping ("/clientes-mvc")
     public String findAll(Model model){
         // 1. Recuperamos los registros de base de datos: RETRIEVE
         List<Cliente> clientes = clienteRepository.findAll();
@@ -86,12 +84,12 @@ public class ClienteControllerMvc {
         return "cliente-list"; // nombre del archivo html
     }
     // RECUPERAR UN REGISTRO UTILIZANDO EL ID
-    @GetMapping("/clientes/{id}")
+    @GetMapping("/clientes-mvc/{id}")
     public String findById(@PathVariable Long id, Model model){
         // 1. Recuperamos el registro de base de datos (si es que existe)
         Optional<Cliente> clienteOpt = clienteRepository.findById(id);
         if(clienteOpt.isEmpty())
-            return "redirect:/products";
+            return "redirect:/clientes-mvc";
         // 2. Cargamos el registro en el modelo
         // 2.1. Sacamos el registro
         Cliente cliente = clienteOpt.get();
@@ -101,26 +99,32 @@ public class ClienteControllerMvc {
         return "cliente-view";
     }
     // CREAR UN REGISTRO NUEVO
-    @GetMapping("/clientes/new")
+    @GetMapping("/clientes-mvc/new")
     public String showForm(Model model){
         Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
         return "cliente-form";
     }
-    @PostMapping("/clientes")
+    @PostMapping("/clientes-mvc")
     public String create(@ModelAttribute("product") Cliente cliente){
         clienteRepository.save(cliente);
-        return "redirect:/clientes";
+        return "redirect:/clientes-mvc";
+    }
+    // MODIFICAR UN REGISTRO UTILIZANDO EL ID
+    @PutMapping("/clientes-mvc")
+    public void update(@RequestBody Cliente cliente){
+        if(cliente.getId() != null && clienteRepository.existsById(cliente.getId()))
+            clienteRepository.save(cliente);
     }
     // ELIMINAR UN REGISTRO UTILIZANDO EL ID
-    @GetMapping("/clientes/delete/{id}")
+    @GetMapping("/clientes-mvc/delete/{id}")
     public String deleteById(@PathVariable Long id) {
         // Comprobamos si el registro existe en la base de datos
         if(clienteRepository.existsById(id))
         // Si existe lo borramos
             clienteRepository.deleteById(id);
         // Y, una vez borrado, nos redirigimos al listado actualizado
-        return "redirect:/clientes";
+        return "redirect:/clientes-mvc";
     }
 
 
