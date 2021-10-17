@@ -55,7 +55,7 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 		telefono1[1] = "656951595";
 		telefono1[2] = "656951888";
 		clienteRepository.save(new Cliente(null, nombreCompleto1, direccionRepository.save(new Direccion(null,
-				"Calle", "Argüeso", 21, null, null, 4,
+				"Calle", "Argüeso", 21, "D", null, 4,
 				"Derecha", "28025", "Madrid", "España")),
 				"jesus.bonilla@gmail.com", "99999999Z", telefono1, 27, true));
 
@@ -151,9 +151,10 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 					System.out.println("Introduzca el SEGUNDO APELLIDO");
 					String segundoApellido = scanner.next();
 					String[] nombreCompleto = new String[3];
-					nombreCompleto1[0] = nombre;
-					nombreCompleto1[1] = primerApellido;
-					nombreCompleto1[2] = segundoApellido;
+					nombreCompleto[0] = nombre;
+					nombreCompleto[1] = primerApellido;
+					nombreCompleto[2] = segundoApellido;
+					scanner.nextLine();
 
 					System.out.println("2. DIRECCIÓN POSTAL");
 					System.out.println("Introduzca el TIPO DE VÍA (Calle, Plaza, Camino, etc.)");
@@ -204,21 +205,21 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 					String dni = scanner.next();
 
 					System.out.println("5. TELÉFONOS");
-					System.out.println("¿Tiene TELÉFONO FIJO? (SÍ / NO");
+					System.out.println("¿Tiene TELÉFONO FIJO? (SÍ / NO)");
 					String respuesta1 = scanner.next();
 					String telefonoDomicilio = "";
 					if (respuesta1.equalsIgnoreCase("si")) {
 						System.out.println("Introduzca el nº de teléfono");
 						telefonoDomicilio = scanner.next();
 					}
-					System.out.println("¿Tiene TELÉFONO MÓVIL? (SÍ / NO");
+					System.out.println("¿Tiene TELÉFONO MÓVIL? (SÍ / NO)");
 					String respuesta2 = scanner.next();
 					String telefonoMovil = "";
 					if (respuesta2.equalsIgnoreCase("si")) {
 						System.out.println("Introduzca el nº de teléfono");
 						telefonoMovil = scanner.next();
 					}
-					System.out.println("¿Tiene TELÉFONO del TRABAJO?");
+					System.out.println("¿Tiene TELÉFONO del TRABAJO? (SÍ / NO)");
 					String respuesta3 = scanner.next();
 					String telefonoTrabajo = "";
 					if (respuesta3.equalsIgnoreCase("si")) {
@@ -259,120 +260,152 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 						continue;
 					}
 					Cliente cliente = clienteOpt.get();
-
-					System.out.println("Introduzca el NOMBRE (actual: " + cliente.getNombreCompleto()[0] + ")");
-					String nombre = scanner.next();
-					System.out.println("Introduzca el PRIMER APELLIDO (actual: " +
-							cliente.getNombreCompleto()[1] + ")");
-					String primerApellido = scanner.next();
-					System.out.println("Introduzca el SEGUNDO APELLIDO (actual: " +
-							cliente.getNombreCompleto()[2] + ")");
-					String segundoApellido = scanner.next();
-					String[] nombreCompleto = new String[3];
-					nombreCompleto[0] = nombre;
-					nombreCompleto[1] = primerApellido;
-					nombreCompleto[2] = segundoApellido;
-					cliente.setNombreCompleto(nombreCompleto);
-
-					System.out.println("2. DIRECCIÓN POSTAL");
-					System.out.println("Introduzca el TIPO DE VÍA (actual: "
-							+ cliente.getDireccionPostal().getTipoDeVia() + " )");
-					cliente.getDireccionPostal().setTipoDeVia(scanner.next());
-					System.out.println("Introduzca el NOMBRE DE LA VÍA (actual: "
-							+ cliente.getDireccionPostal().getNombreVia() + " )");
-					cliente.getDireccionPostal().setNombreVia(scanner.next());
-					System.out.println("Introduzca el NÚMERO DE LA VÍA (actual: "
-							+ cliente.getDireccionPostal().getNumVia() + " )");
-					cliente.getDireccionPostal().setNumVia(scanner.nextInt());
-					System.out.println("¿Quiere introducir el PORTAL? SÍ / NO (actual: " +
-							cliente.getDireccionPostal().getPortal() + " )");
-					short portal = ' ';
+					System.out.println("¿Quiere modificar los DATOS PERSONALES?");
 					if (scanner.next().equalsIgnoreCase("si")) {
-						System.out.println("Introduzca el PORTAL");
-						portal = scanner.nextShort();
+						System.out.println("¿Quiere modificar el NOMBRE (actual: " + cliente.getNombreCompleto()[0] + ")");
+						String nombre = "";
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el NOMBRE");
+							nombre = scanner.next();
+						}
+						System.out.println("¿Quiere modificar el PRIMER APELLIDO (actual: " +
+								cliente.getNombreCompleto()[1] + ")");
+						String primerApellido = "";
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el PRIMER APELLIDO");
+							primerApellido = scanner.next();
+						}
+						System.out.println("¿Quiere modificar el SEGUNDO APELLIDO (actual: " +
+								cliente.getNombreCompleto()[2] + ")");
+						String segundoApellido = "";
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el SEGUNDO APELLIDO");
+							segundoApellido = scanner.next();
+						}
+						String[] nombreCompleto = new String[3];
+						nombreCompleto[0] = nombre;
+						nombreCompleto[1] = primerApellido;
+						nombreCompleto[2] = segundoApellido;
+						cliente.setNombreCompleto(nombreCompleto);
 					}
-					System.out.println("¿Quiere introducir la ESCALERA? SÍ / NO (actual: "
-							+ cliente.getDireccionPostal().getEscalera() + " )");
-					String escalera = "";
+					System.out.println("¿Quiere modificar la DIRECCIÓN POSTAL?");
 					if (scanner.next().equalsIgnoreCase("si")) {
-						System.out.println("Introduzca la ESCALERA");
-						escalera = scanner.next();
+						System.out.println("¿Quiere modificar el TIPO DE VÍA? (actual: "
+								+ cliente.getDireccionPostal().getTipoDeVia() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el TIPO DE VÍA");
+							cliente.getDireccionPostal().setTipoDeVia(scanner.next());
+						}
+						System.out.println("¿Quiere modificar el NOMBRE DE LA VÍA? (actual: "
+								+ cliente.getDireccionPostal().getNombreVia() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el NOMBRE DE LA VÍA");
+							cliente.getDireccionPostal().setNombreVia(scanner.next());
+						}
+						System.out.println("¿Quiere modificar el NÚMERO DE LA VÍA? (actual: "
+								+ cliente.getDireccionPostal().getNumVia() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el NÚMERO DE LA VÍA");
+							cliente.getDireccionPostal().setNumVia(scanner.nextInt());
+							scanner.nextLine();
+						}
+						System.out.println("¿Quiere modificar el PORTAL? (actual: " +
+								cliente.getDireccionPostal().getPortal() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el PORTAL");
+							cliente.getDireccionPostal().setPortal(scanner.next());
+						}
+						System.out.println("¿Quiere modificar la ESCALERA? (actual: "
+								+ cliente.getDireccionPostal().getEscalera() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca la ESCALERA");
+							cliente.getDireccionPostal().setEscalera(scanner.next());
+						}
+						System.out.println("¿Quiere modificar el PISO? (actual: "
+								+ cliente.getDireccionPostal().getPiso() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el PISO");
+							cliente.getDireccionPostal().setPiso(scanner.nextInt());;
+							scanner.nextLine();
+						}
+						System.out.println("¿Quiere modificar la PUERTA? (actual: "
+								+ cliente.getDireccionPostal().getPuerta() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca la PUERTA");
+							cliente.getDireccionPostal().setPuerta(scanner.next());
+						}
+						System.out.println("¿Quiere modificar el CÓDIGO POSTAL? (actual: "
+								+ cliente.getDireccionPostal().getCodigoPostal() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el CÓDIGO POSTAL");
+							cliente.getDireccionPostal().setCodigoPostal(scanner.next());
+						}
+						System.out.println("¿Quiere modificar la CIUDAD? (actual: "
+								+ cliente.getDireccionPostal().getCiudad() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca la CIUDAD");
+							cliente.getDireccionPostal().setCiudad(scanner.next());
+						}
+						System.out.println("¿Quiere modificar el PAÍS? (actual: "
+								+ cliente.getDireccionPostal().getPais() + " )");
+						if (scanner.next().equalsIgnoreCase("si")) {
+							System.out.println("Introduzca el PAÍS");
+							cliente.getDireccionPostal().setPais(scanner.next());
+						}
 					}
-					System.out.println("¿Quiere introducir el PISO? SÍ / NO (actual: "
-							+ cliente.getDireccionPostal().getPiso() + " )");
-					int piso = 0;
+					System.out.println("¿Quiere modificar el EMAIL?");
 					if (scanner.next().equalsIgnoreCase("si")) {
-						System.out.println("Introduzca el PISO");
-						piso = scanner.nextInt();
+						System.out.println("Introduzca el email (actual: " + cliente.getEmail() + " )");
+						cliente.setEmail(scanner.next());
+					}
+					System.out.println("¿Quiere modificar el DNI?");
+					if (scanner.next().equalsIgnoreCase("si")) {
+						System.out.println("Introduzca el DNI (actual: " + cliente.getDni() + " )");
+						cliente.setDni(scanner.next());
+					}
+					System.out.println("¿Quiere modificar los TELÉFONOS?");
+					if (scanner.next().equalsIgnoreCase("si")) {
+						String telefonoDomicilio = "";
+						String telefonoMovil = "";
+						String telefonoTrabajo = "";
+						if (cliente.getTelefono()[0] != null) {
+							System.out.println("Introduzca el TELÉFONO del DOMICILIO (actual: " +
+									cliente.getTelefono()[0] + ")");
+							telefonoDomicilio = scanner.next();
+						}
+						if (cliente.getTelefono()[1] != null) {
+							System.out.println("Introduzca el TELÉFONO MÓVIL (actual: " +
+									cliente.getTelefono()[1] + ")");
+							telefonoMovil = scanner.next();
+						}
+						if (cliente.getTelefono()[2] != null) {
+							System.out.println("Introduzca el TELÉFONO del TRABAJO (actual: " +
+									cliente.getTelefono()[2] + ")");
+							telefonoTrabajo = scanner.next();
+						}
+						String[] telefono = new String[3];
+						telefono[0] = telefonoDomicilio;
+						telefono[1] = telefonoMovil;
+						telefono[2] = telefonoTrabajo;
+						cliente.setTelefono(telefono);
+
+					}
+					System.out.println("¿Quiere modificar la EDAD?");
+					if (scanner.next().equalsIgnoreCase("si")) {
+						System.out.println("Introduzca la edad (actual: " + cliente.getEdad() + ")");
+						cliente.setEdad(scanner.nextInt());
+					}
+					System.out.println("¿Quiere modificar el status de SOCIO?");
+					if (scanner.next().equalsIgnoreCase("si")) {
+						System.out.println("Tiene carnet de socio (actualmente: " + cliente.getCarnetSocio() + ")");
+						cliente.setCarnetSocio(scanner.nextBoolean());
 						scanner.nextLine();
 					}
-					System.out.println("¿Quiere introducir la PUERTA? SÍ / NO (actual: "
-							+ cliente.getDireccionPostal().getPuerta() + " )");
-					String puerta = "";
-					if (scanner.next().equalsIgnoreCase("si")) {
-						System.out.println("Introduzca la PUERTA");
-						puerta = scanner.next();
-					}
-					System.out.println("Introduzca el CÓDIGO POSTAL (actual: "
-							+ cliente.getDireccionPostal().getCodigoPostal() + " )");
-					cliente.getDireccionPostal().setCodigoPostal(scanner.next());
-					System.out.println("Introduzca la CIUDAD (actual: "
-							+ cliente.getDireccionPostal().getCiudad() + " )");
-					cliente.getDireccionPostal().setCiudad(scanner.next());
-					System.out.println("Introduzca el PAÍS (actual: "
-							+ cliente.getDireccionPostal().getPais() + " )");
-					cliente.getDireccionPostal().setPais(scanner.next());
-
-					System.out.println("3. EMAIL");
-					System.out.println("Introduzca el email (actual: "
-							+ cliente.getEmail() + " )");
-					cliente.setEmail(scanner.next());
-
-					System.out.println("4. DNI");
-					System.out.println("Introduzca el DNI (actual: "
-							+ cliente.getDni() + " )");
-					cliente.setDni(scanner.next());
-
-					System.out.println("5. TELÉFONOS");
-					String telefonoDomicilio = "";
-					String telefonoMovil = "";
-					String telefonoTrabajo = "";
-					if (cliente.getTelefono()[0] != null) {
-						System.out.println("Introduzca el TELÉFONO del DOMICILIO (actual: " +
-								cliente.getTelefono()[0] + ")");
-						telefonoDomicilio = scanner.next();
-					}
-					if (cliente.getTelefono()[1] != null) {
-						System.out.println("Introduzca el TELÉFONO MÓVIL (actual: " +
-								cliente.getTelefono()[1] + ")");
-						telefonoMovil = scanner.next();
-					}
-					if (cliente.getTelefono()[2] != null) {
-						System.out.println("Introduzca el TELÉFONO del TRABAJO (actual: " +
-								cliente.getTelefono()[2] + ")");
-						telefonoTrabajo = scanner.next();
-					}
-					String[] telefono = new String[3];
-					telefono[0] = telefonoDomicilio;
-					telefono[1] = telefonoMovil;
-					telefono[2] = telefonoTrabajo;
-					cliente.setTelefono(telefono);
-
-					System.out.println("6. EDAD");
-					System.out.println("Introduzca la edad (actual: " + cliente.getEdad() + ")");
-					cliente.setEdad(scanner.nextInt());
-
-					System.out.println("7. CARNET DE SOCIO");
-					System.out.println("Tiene carnet de socio (actualmente: " + cliente.getCarnetSocio() + ")");
-					cliente.setCarnetSocio(scanner.nextBoolean());
-					scanner.nextLine();
-
 					clienteRepository.save(cliente);
 					System.out.println("Cliente modificado correctamente");
 
 				} else if (opcion == 6) {
 					System.out.println("Ha seleccionado la opción 6 - BORRAR UN CLIENTE (utilizando el id)");
-
 					System.out.println("Por favor, introduzca el id del cliente que desea eliminar: ");
 					Long id = scanner.nextLong();
 					Optional<Cliente> clienteOpt = clienteRepository.findById(id);
@@ -409,7 +442,8 @@ public class M2TestingJavaJorgeAparicioApplication implements CommandLineRunner 
 							"EL NOMBRE COMPLETO");
 					System.out.println("Por favor, introduzca el NOMBRE y los APELLIDOS del cliente que desea " +
 							"consultar");
-					String nombreCompleto = scanner.nextLine();
+					String nombreCompletoAux = scanner.nextLine();
+					String[] nombreCompleto = nombreCompletoAux.split(" ");
 					clientes =  clienteRepository.findByNombreCompleto(nombreCompleto);
 					if (clientes.isEmpty()) {
 						System.out.println("No existe ningún cliente con esos datos.");
