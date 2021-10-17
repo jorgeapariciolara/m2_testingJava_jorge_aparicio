@@ -4,6 +4,7 @@ import com.example.m2_testingJava_jorge_aparicio.entities.Cliente;
 import com.example.m2_testingJava_jorge_aparicio.entities.Direccion;
 import com.example.m2_testingJava_jorge_aparicio.repository.ClienteRepository;
 import com.example.m2_testingJava_jorge_aparicio.repository.DireccionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +14,18 @@ import java.util.Optional;
 
 @Controller
 public class ClienteControllerMvc {
-
+    /*
     private ClienteRepository clienteRepository;
     public ClienteControllerMvc (ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;}
     private DireccionRepository direccionRepository;
     public ClienteControllerMvc (DireccionRepository direccionRepository) {
         this.direccionRepository = direccionRepository;}
+     */
+    @Autowired
+    ClienteRepository clienteRepository;
+    @Autowired
+    DireccionRepository direccionRepository;
     public ClienteControllerMvc () {}
 
     // MÉTODOS

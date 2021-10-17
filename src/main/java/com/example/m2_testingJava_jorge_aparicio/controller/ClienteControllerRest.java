@@ -4,6 +4,7 @@ import com.example.m2_testingJava_jorge_aparicio.entities.Cliente;
 import com.example.m2_testingJava_jorge_aparicio.entities.Direccion;
 import com.example.m2_testingJava_jorge_aparicio.repository.ClienteRepository;
 import com.example.m2_testingJava_jorge_aparicio.repository.DireccionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,12 +14,10 @@ import java.util.Optional;
 public class ClienteControllerRest {
 
     public ClienteControllerRest () {}
-
-    private ClienteRepository clienteRepository;
-    public ClienteControllerRest(ClienteRepository clienteRepository) {this.clienteRepository=clienteRepository;}
-
-    private DireccionRepository direccionRepository;
-    public ClienteControllerRest(DireccionRepository direccionRepository){this.direccionRepository=direccionRepository;}
+    @Autowired
+    ClienteRepository clienteRepository;
+    @Autowired
+    DireccionRepository direccionRepository;
 
     // MÉTODOS
     // CREAR REGISTROS DE PRUEBA
@@ -65,7 +64,6 @@ public class ClienteControllerRest {
                 "Calle", "Radio", 51, "3", "Izquierda", 3,
                 "D", "28019", "Madrid", "España")), "chusabermudez@gmail.com",
                 "77777777X", telefono3, 27, true));
-
     }
     // CONSULTAR TODOS LOS REGISTROS
     @GetMapping ("/clientes-rest")
@@ -94,7 +92,7 @@ public class ClienteControllerRest {
             clienteRepository.save(cliente);
     }
     // ACTUALIZAR UN REGISTRO
-    @PutMapping("/clientes-rest")
+    @PutMapping("/clientes-rest/{id}")
     public void update(@RequestBody Cliente cliente){
         if(cliente.getId() != null && clienteRepository.existsById(cliente.getId()))
             clienteRepository.save(cliente);
