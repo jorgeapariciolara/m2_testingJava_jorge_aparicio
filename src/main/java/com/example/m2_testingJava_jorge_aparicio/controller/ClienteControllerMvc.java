@@ -14,14 +14,7 @@ import java.util.Optional;
 
 @Controller
 public class ClienteControllerMvc {
-    /*
-    private ClienteRepository clienteRepository;
-    public ClienteControllerMvc (ClienteRepository clienteRepository) {
-        this.clienteRepository = clienteRepository;}
-    private DireccionRepository direccionRepository;
-    public ClienteControllerMvc (DireccionRepository direccionRepository) {
-        this.direccionRepository = direccionRepository;}
-     */
+
     @Autowired
     ClienteRepository clienteRepository;
     @Autowired
@@ -90,7 +83,7 @@ public class ClienteControllerMvc {
         return "cliente-list"; // nombre del archivo html
     }
     // RECUPERAR UN REGISTRO UTILIZANDO EL ID
-    @GetMapping("/clientes-mvc/{id}")
+    @GetMapping("/clientes-mvc/id/{id}")
     public String findById(@PathVariable Long id, Model model){
         // 1. Recuperamos el registro de base de datos (si es que existe)
         Optional<Cliente> clienteOpt = clienteRepository.findById(id);

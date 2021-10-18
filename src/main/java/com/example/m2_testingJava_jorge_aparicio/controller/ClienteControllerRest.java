@@ -71,7 +71,7 @@ public class ClienteControllerRest {
         return clienteRepository.findAll();
     }
     // CONSULTAR UN REGISTRO POR ID
-    @GetMapping ("/clientes-rest/{id}")
+    @GetMapping ("/clientes-rest/id/{id}")
     public Cliente findById(@PathVariable Long id) {
         Optional<Cliente> clienteOpt = clienteRepository.findById(id);
         if (clienteOpt.isPresent()) {
@@ -81,7 +81,7 @@ public class ClienteControllerRest {
         }
     }
     // CONSULTAR UN REGISTRO POR DNI
-    @GetMapping ("/clientes-rest/{dni}")
+    @GetMapping ("/clientes-rest/dni/{dni}")
     public List<Cliente> findByDni (@PathVariable String dni) {
         return clienteRepository.findByDni(dni);
     }
