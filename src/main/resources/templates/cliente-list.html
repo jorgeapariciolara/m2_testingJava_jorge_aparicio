@@ -16,11 +16,15 @@
 <ul class="list-group">
     <li class="list-group-item" th:each="cliente : ${clientes}">
         <span th:text="${cliente.id}"></span>
-        <span th:text="${cliente.nombreCompleto}"></span>
+        <span th:text="${cliente.nombreCompleto[0]}"></span>
+        <span th:text="${cliente.nombreCompleto[1]}"></span>
+        <span th:text="${cliente.nombreCompleto[2]}"></span>
         <span th:text="${cliente.direccionPostal}"></span>
         <span th:text="${cliente.email}"></span>
         <span th:text="${cliente.dni}"></span>
-        <span th:text="${cliente.telefono}"></span>
+        <span th:text="${cliente.telefono[0]}"></span>
+        <span th:text="${cliente.telefono[1]}"></span>
+        <span th:text="${cliente.telefono[2]}"></span>
         <span th:text="${cliente.edad}"></span>
         <span th:text="${cliente.carnetSocio}"></span>
         <a class="btn btn-primary" th:href="@{/clientes/{id}(id=${cliente.id})}">Ver cliente</a>

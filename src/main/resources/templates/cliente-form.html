@@ -16,8 +16,16 @@
             <h1>CREAR CLIENTE</h1>
             <form th:action="@{/clientes}" th:object="${cliente}" method="POST">
                 <div class="mb-3">
-                    <label for="nombreCompleto" class="form-label">Nombre completo</label>
-                    <input type="String[]" class="form-control" id="nombreCompleto" th:field="*{nombreCompleto}">
+                    <label for="nombreCompleto[0]" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombreCompleto[0]" th:field="*{nombreCompleto[0]}">
+                </div>
+                <div class="mb-3">
+                    <label for="nombreCompleto[1]" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombreCompleto[1]" th:field="*{nombreCompleto[1]}">
+                </div>
+                <div class="mb-3">
+                    <label for="nombreCompleto[2]" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombreCompleto[2]" th:field="*{nombreCompleto[2]}">
                 </div>
                 <div class="mb-3">
                     <label for="direccionPostal" class="form-label">Direccion Postal</label>
