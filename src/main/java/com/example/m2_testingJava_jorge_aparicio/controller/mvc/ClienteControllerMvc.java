@@ -1,4 +1,4 @@
-package com.example.m2_testingJava_jorge_aparicio.controller;
+package com.example.m2_testingJava_jorge_aparicio.controller.mvc;
 
 import com.example.m2_testingJava_jorge_aparicio.entities.Cliente;
 import com.example.m2_testingJava_jorge_aparicio.entities.Direccion;
