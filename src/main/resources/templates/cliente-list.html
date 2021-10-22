@@ -12,7 +12,7 @@
 
 <h1>E-COMMERCE DE CLIENTES</h1>
 
-<a class="mt-5 mb-5 btn btn-success" th:href="@{/clientes/new}">Crear cliente</a>
+<a class="mt-5 mb-5 btn btn-success" th:href="@{/clientes-mvc/new}">Crear cliente</a>
 <ul class="list-group">
     <li class="list-group-item" th:each="cliente : ${clientes}">
         <span th:text="${cliente.id}"></span>
@@ -27,8 +27,8 @@
         <span th:text="${cliente.telefono[2]}"></span>
         <span th:text="${cliente.edad}"></span>
         <span th:text="${cliente.carnetSocio}"></span>
-        <a class="btn btn-primary" th:href="@{/clientes/{id}(id=${cliente.id})}">Ver cliente</a>
-        <a class="btn btn-danger" th:href="@{/clientes/delete/{id}(id=${cliente.id})}">Borrar cliente</a>
+        <a class="btn btn-primary" th:href="@{/clientes-mvc/id/{id}(id=${cliente.id})}">Ver cliente</a>
+        <a class="btn btn-danger" th:href="@{/clientes-mvc/delete/{id}(id=${cliente.id})}">Borrar cliente</a>
     </li>
 </ul>
 
