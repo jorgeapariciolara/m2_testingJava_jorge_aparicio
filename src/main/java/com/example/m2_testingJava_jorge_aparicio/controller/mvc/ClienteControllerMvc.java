@@ -105,7 +105,7 @@ public class ClienteControllerMvc {
         return "cliente-form";
     }
     @PostMapping("/clientes-mvc")
-    public String create(@ModelAttribute("product") Cliente cliente){
+    public String create(@ModelAttribute("cliente") Cliente cliente){
         clienteRepository.save(cliente);
         return "redirect:/clientes-mvc";
     }
