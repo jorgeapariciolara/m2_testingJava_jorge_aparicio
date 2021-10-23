@@ -104,13 +104,13 @@ public class ClienteControllerMvc {
         model.addAttribute("cliente", cliente);
         return "cliente-form";
     }
-    @PostMapping("/clientes-mvc")
+    @PostMapping("/clientes-mvc/save")
     public String create(@ModelAttribute("cliente") Cliente cliente){
         clienteRepository.save(cliente);
         return "redirect:/clientes-mvc";
     }
     // MODIFICAR UN REGISTRO UTILIZANDO EL ID
-    @PutMapping("/clientes-mvc")
+    @PutMapping("/clientes-mvc/update")
     public void update(@RequestBody Cliente cliente){
         if(cliente.getId() != null && clienteRepository.existsById(cliente.getId()))
             clienteRepository.save(cliente);
@@ -125,6 +125,4 @@ public class ClienteControllerMvc {
         // Y, una vez borrado, nos redirigimos al listado actualizado
         return "redirect:/clientes-mvc";
     }
-
-
 }
